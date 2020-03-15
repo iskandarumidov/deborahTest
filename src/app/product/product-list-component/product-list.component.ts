@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IProduct } from '../product';
 
 @Component({
   selector: 'pm-products',
@@ -11,8 +12,25 @@ export class ProductListComponent implements OnInit {
   imageMargin: number = 2;
   showImage: boolean = true;
   imageButtonText: string = "Hide";
-  listFilter: string = "cart";
-  products: any[] = [
+  _listFilter: string;
+  productsFiltered: IProduct[];
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string){
+    this._listFilter = value;
+    this.productsFiltered = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+
+  performFilter(filterBy: string): IProduct[]{
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) => 
+          product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+  products: IProduct[] = [
     {
       "productId": 2,
       "productName": "Garden Cart",
@@ -21,7 +39,7 @@ export class ProductListComponent implements OnInit {
       "description": "descasdcasdc",
       "price": 32.99,
       "starRating": 4.2,
-      "imageUrl": "../../../assets/images/garden_cart.png"
+      "imageUrl": "assets/images/garden_cart.png"
     },
     {
       "productId": 5,
@@ -35,9 +53,11 @@ export class ProductListComponent implements OnInit {
     }
   ];
 
-  productsFiltered = this.products;
+  
 
-  constructor() { }
+  constructor() {
+    this.productsFiltered = this.products;
+  }
 
   ngOnInit() {
   }

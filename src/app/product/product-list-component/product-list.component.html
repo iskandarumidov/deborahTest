@@ -33,7 +33,7 @@
                 <tbody>
                     <tr *ngFor="let product of productsFiltered">
                         <td>
-                            <img *ngIf="showImage" src="{{product.imageUrl}}" [style.width.px]="imageWidth" [style.margin.px]="imageMargin" title="{{product.productName}"/>
+                            <img *ngIf="showImage" src="{{product.imageUrl}}" [style.width.px]="imageWidth" [style.margin.px]="imageMargin" title="{{product.productName}}"/>
                         </td>
                         <td>{{product.productName}}</td>
                         <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
