@@ -30,6 +30,11 @@ export class ProductListComponent implements OnInit {
           product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
+  onRatingClicked(message: string): void{
+    console.log(message);
+    this.pageTitle += message;
+  }
+
   products: IProduct[] = [
     {
       "productId": 2,
@@ -47,7 +52,7 @@ export class ProductListComponent implements OnInit {
       "productCode": "GDN-0024",
       "releaseDate": "March 19, 2019",
       "description": "descasffffdcasdc",
-      "price": 34.99,
+      "price": 35.99,
       "starRating": 1.2,
       "imageUrl": "assets/images/hammer.png"
     }
